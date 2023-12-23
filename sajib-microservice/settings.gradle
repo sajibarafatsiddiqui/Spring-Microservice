@@ -1,0 +1,4 @@
+include ':products:product-service'
+include ':products:review-service'
+include ':products:recommendation-service'
+include ':products:product-composite-service'
