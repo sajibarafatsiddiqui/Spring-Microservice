@@ -1,13 +1,10 @@
+package se.magnus.microservices.api.core.product;
+
 public class Product {
     private final int productId;
     private final String name;
     private final int weight;
     private final String serviceAddress;
-
-    public Product() {
-        
-    }
-
 
     public Product(int productId, String name, int weight, String serviceAddress) {
         this.productId = productId;
