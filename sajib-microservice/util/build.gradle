@@ -11,6 +11,9 @@ java {
 	sourceCompatibility = '17'
 }
 
+bootJar {
+   enabled = false
+}
 repositories {
 	mavenCentral()
 }
@@ -18,12 +21,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation project(':api')
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
-	implementation project(':api')
+	
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
-sss

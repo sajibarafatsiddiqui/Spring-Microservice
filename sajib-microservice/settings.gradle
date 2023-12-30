@@ -1,6 +1,6 @@
+include ':api'
+include ':util'
 include ':products:product-service'
 include ':products:review-service'
 include ':products:recommendation-service'
 include ':products:product-composite-service'
-include ':api'
-include ':util'

@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceUtil {
     private static final Logger log = LoggerFactory.getLogger(ServiceUtil.class);
-    private final int port;
+    private final String port;
     private String serviceAddress=null;
     
     @Autowired
-    public ServiceUtil(@Value("{server.port}") int port) {
+    public ServiceUtil(@Value("${server.port}") String port) {
         this.port = port;
     }
 

@@ -34,6 +34,7 @@ public @ResponseBody HttpErrorInfo handleNotFounddException(ServerHttpRequest re
     private HttpErrorInfo createHttpErrorInfo(Exception ex,ServerHttpRequest request,HttpStatus httpStatus){
        final String path = request.getPath().pathWithinApplication().value();
        final String message=ex.getMessage();
+       log.debug("Returning HTTP status: {} for path: {}, message: {}", httpStatus, path, message);
        return new HttpErrorInfo(message,path,httpStatus)  ;                                                                                                       
 
     }
