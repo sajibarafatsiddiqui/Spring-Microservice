@@ -8,54 +8,55 @@ import se.magnus.microservices.api.core.recommendation.Recommendation;
 import se.magnus.microservices.api.core.review.Review;
 
 public class ProductComposite {
-    private final Product product;
-    private final List<Recommendation> recommendations;
-    private final List<Review> reviews;
+    private final int productId;
+  private final String name;
+  private final int weight;
+  
+    private final List<RecommendationSummary> recommendations;
+    private final List<ReviewSummary> reviews;
+    private final ServiceAddresses serviceAddresses;
+    
 
-
-    public ProductComposite(Product product, List<Recommendation> recommendations, List<Review> reviews) {
-        this.product = product;
+    public ProductComposite(int productId, String name, int weight, List<RecommendationSummary> recommendations, List<ReviewSummary> reviews, ServiceAddresses serviceAddresses) {
+        this.productId = productId;
+        this.name = name;
+        this.weight = weight;
         this.recommendations = recommendations;
         this.reviews = reviews;
+        this.serviceAddresses = serviceAddresses;
     }
 
-    public Product getProduct() {
-        return this.product;
+    public int getProductId() {
+        return this.productId;
     }
 
 
-    public List<Recommendation> getRecommendations() {
+    public String getName() {
+        return this.name;
+    }
+
+
+    public int getWeight() {
+        return this.weight;
+
+    }
+
+    public List<RecommendationSummary> getRecommendations() {
         return this.recommendations;
     }
 
 
-    public List<Review> getReviews() {
+    public List<ReviewSummary> getReviews() {
         return this.reviews;
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof ProductComposite)) {
-            return false;
-        }
-        ProductComposite productComposite = (ProductComposite) o;
-        return Objects.equals(product, productComposite.product) && Objects.equals(recommendations, productComposite.recommendations) && Objects.equals(reviews, productComposite.reviews);
+    public ServiceAddresses getServiceAddresses() {
+        return this.serviceAddresses;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(product, recommendations, reviews);
-    }
 
-    @Override
-    public String toString() {
-        return "{" +
-            " product='" + getProduct() + "'" +
-            ", recommendations='" + getRecommendations() + "'" +
-            ", reviews='" + getReviews() + "'" +
-            "}";
-    }
+   
+ 
+    
 }

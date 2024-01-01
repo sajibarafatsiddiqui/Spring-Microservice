@@ -18,17 +18,17 @@ import se.magnus.microservices.api.exception.NotFoundException;
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
 
-private final Logger log = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
+private static final Logger log = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
 
 @ResponseStatus(NOT_FOUND)
 @ExceptionHandler(NotFoundException.class)
-public @ResponseBody HttpErrorInfo handleNotFounddException(ServerHttpRequest req, NotFoundException ex){
+public @ResponseBody HttpErrorInfo handleNotFoundException(ServerHttpRequest req, NotFoundException ex){
     return createHttpErrorInfo(ex,req,NOT_FOUND);
 }
 @ResponseStatus(UNPROCESSABLE_ENTITY)
 @ExceptionHandler(InvalidInputException.class)
-public @ResponseBody HttpErrorInfo handleNotFounddException(ServerHttpRequest req, InvalidInputException ex){
-    return createHttpErrorInfo(ex,req,NOT_FOUND);
+public @ResponseBody HttpErrorInfo handleInvalidInputException(ServerHttpRequest req, InvalidInputException ex){
+    return createHttpErrorInfo(ex,req,UNPROCESSABLE_ENTITY);
 }
 
     private HttpErrorInfo createHttpErrorInfo(Exception ex,ServerHttpRequest request,HttpStatus httpStatus){

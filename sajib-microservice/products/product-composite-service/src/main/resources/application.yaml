@@ -1,17 +1,16 @@
 server.port: 7020
 server.error.include-message: always
-app:
-    product:
-        host:localhost
-        port:7021
-    review:
-        host:localhost
-        port:7022
-    
-    recommendation:
-        host:localhost
-        port:7023
 
+app:
+  product:
+    host: localhost
+    port: 7021
+  review:
+    host: localhost
+    port: 7023
+  recommendation:
+    host: localhost
+    port: 7022
 
 logging:
   level:

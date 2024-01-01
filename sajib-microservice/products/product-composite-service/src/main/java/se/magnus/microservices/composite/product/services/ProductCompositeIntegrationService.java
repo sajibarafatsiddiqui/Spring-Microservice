@@ -6,11 +6,13 @@ import java.util.List;
 import static org.springframework.http.HttpMethod.GET;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -36,7 +38,7 @@ public class ProductCompositeIntegrationService implements ProductService,Review
     private final String recommendationServiceUrl;
     private final String reviewServiceUrl;
 
-
+    @Autowired
     public ProductCompositeIntegrationService(RestTemplate restTemplate, ObjectMapper objectMapper,
     @Value("${app.product.host}") String productHost,
     @Value("${app.product.port}") String productPort,
@@ -47,9 +49,9 @@ public class ProductCompositeIntegrationService implements ProductService,Review
     ) {
         this.restTemplate = restTemplate;
         this.objectMapper = objectMapper;
-        productServiceUrl = "http:/"+productHost +"/:"+productPort+"/product/";
-        recommendationServiceUrl ="http:/"+recommendationHost+"/:"+recommendationPort+"/recommendation?productId=";
-        reviewServiceUrl = "http:/"+reviewHost+"/:"+reviewPort+"/review?productId=";
+        productServiceUrl = "http://"+productHost +":"+productPort+"/product/";
+        recommendationServiceUrl ="http://"+recommendationHost+":"+recommendationPort+"/recommendation?productId=";
+        reviewServiceUrl = "http://"+reviewHost+":"+reviewPort+"/review?productId=";
     }
     @Override
     public List<Recommendation> getRecommendations(int productId) {

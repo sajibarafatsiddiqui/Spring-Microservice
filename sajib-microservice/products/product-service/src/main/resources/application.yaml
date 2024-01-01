@@ -1,4 +1,4 @@
-server.port: 7001
+server.port: 7021
 server.error.include-message: always
 
 logging:
