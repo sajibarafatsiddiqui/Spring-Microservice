@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 import se.magnus.microservices.api.core.product.Product;
 import se.magnus.microservices.api.core.recommendation.Recommendation;
@@ -21,7 +22,7 @@ import se.magnus.microservices.composite.product.services.ProductCompositeIntegr
 class ProductCompositeServiceApplicationTests {
 
 	@Autowired
-	WebClient webClient;
+	WebTestClient webClient;
 	@MockBean
 	ProductCompositeIntegrationService productComposite;
 
@@ -34,13 +35,29 @@ class ProductCompositeServiceApplicationTests {
 	@BeforeEach
 	void setUp(){
 		when(productComposite.getProduct(PRODUCT_OK)).thenReturn(new Product(1,"sa",1,"AA"));
-		when(productComposite.getRecommendations(PRODUCT_OK).thenReturn(singletonList(new Recommendation(1,1,1,"as","asas","asas"))));
-		when (productComposite.getReviews(PRODUCT_OK).thenReturn(singletonList(new Review(1,1,"asasa","wewewe","zxzxz","wqwqw"))));
+		when(productComposite.getRecommendations(PRODUCT_OK)).thenReturn(singletonList(new Recommendation(1,1,1,"as","asas","asas")));
+		when (productComposite.getReviews(PRODUCT_OK)).thenReturn(singletonList(new Review(1,1,"asasa","wewewe","zxzxz","wqwqw")));
+
 	}
 
 
 	@Test
 	void contextLoads() {
+	}
+
+	@Test
+	void getProductById(){
+		webClient.get()
+		.uri("http://product-composite/"+PRODUCT_OK)
+		.accept(MediaType.APPLICATION_JSON)
+		.exchange()
+		.expectStatus().isOk()
+        .expectHeader().contentType(MediaType.APPLICATION_JSON)
+        .expectBody()
+        .jsonPath("$.productId").isEqualTo(PRODUCT_OK)
+        .jsonPath("$.recommendations.length()").isEqualTo(1)
+        .jsonPath("$.reviews.length()").isEqualTo(1);
+
 	}
 
 }
