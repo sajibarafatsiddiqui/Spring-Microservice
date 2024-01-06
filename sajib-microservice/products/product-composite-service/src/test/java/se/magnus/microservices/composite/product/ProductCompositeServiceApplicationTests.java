@@ -34,9 +34,9 @@ class ProductCompositeServiceApplicationTests {
 
 	@BeforeEach
 	void setUp(){
-		when(productComposite.getProduct(PRODUCT_OK)).thenReturn(new Product(1,"sa",1,"AA"));
-		when(productComposite.getRecommendations(PRODUCT_OK)).thenReturn(singletonList(new Recommendation(1,1,1,"as","asas","asas")));
-		when (productComposite.getReviews(PRODUCT_OK)).thenReturn(singletonList(new Review(1,1,"asasa","wewewe","zxzxz","wqwqw")));
+		when(productComposite.getProduct(PRODUCT_OK)).thenReturn(new Product(PRODUCT_OK,"sa",1,"AA"));
+		when(productComposite.getRecommendations(PRODUCT_OK)).thenReturn(singletonList(new Recommendation(PRODUCT_OK,1,1,"as","asas","asas")));
+		when (productComposite.getReviews(PRODUCT_OK)).thenReturn(singletonList(new Review(PRODUCT_OK,1,"asasa","wewewe","zxzxz","wqwqw")));
 
 	}
 
@@ -48,7 +48,7 @@ class ProductCompositeServiceApplicationTests {
 	@Test
 	void getProductById(){
 		webClient.get()
-		.uri("http://product-composite/"+PRODUCT_OK)
+		.uri("/product-composite/"+PRODUCT_OK)
 		.accept(MediaType.APPLICATION_JSON)
 		.exchange()
 		.expectStatus().isOk()
