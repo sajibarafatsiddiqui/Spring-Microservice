@@ -1,4 +1,9 @@
-server.port: 7023
+server.port: 8080
+spring:
+  config:
+    activate:
+      on-profile:
+      - docker
 server.error.include-message: always
 
 logging:

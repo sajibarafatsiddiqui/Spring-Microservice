@@ -1,5 +1,11 @@
-server.port: 7022
+server.port: 8080
 server.error.include-message: always
+spring:
+  config:
+    activate:
+      on-profile:
+      - docker
+    
 
 logging:
   level:

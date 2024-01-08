@@ -1,7 +1,13 @@
-server.port: 7021
 server.error.include-message: always
+spring:
+  config:
+    activate:
+      on-profile:
+      - docker
 
 logging:
   level:
     root: INFO
     se.magnus.microservices: DEBUG
+
+server.port: 8080
