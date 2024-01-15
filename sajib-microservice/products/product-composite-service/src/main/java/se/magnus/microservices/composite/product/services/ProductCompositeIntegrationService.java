@@ -1,5 +1,4 @@
 package se.magnus.microservices.composite.product.services;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

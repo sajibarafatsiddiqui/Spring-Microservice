@@ -1,4 +1,5 @@
 package se.magnus.microservices.util.http;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException.BadRequest;
 
+import se.magnus.microservices.api.exception.BadRequestException;
 import se.magnus.microservices.api.exception.InvalidInputException;
 import se.magnus.microservices.api.exception.NotFoundException;
 
@@ -19,6 +22,13 @@ import se.magnus.microservices.api.exception.NotFoundException;
 public class GlobalControllerExceptionHandler {
 
 private static final Logger log = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+@ExceptionHandler(BadRequestException.class)
+public HttpErrorInfo handleBadRequestException(ServerHttpRequest req,BadRequestException ex){
+    return createHttpErrorInfo(ex, req, BAD_REQUEST);
+
+}
 
 @ResponseStatus(NOT_FOUND)
 @ExceptionHandler(NotFoundException.class)
