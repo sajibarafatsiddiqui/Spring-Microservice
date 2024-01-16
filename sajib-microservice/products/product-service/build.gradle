@@ -28,6 +28,7 @@ dependencies {
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	implementation project(':api')
