@@ -11,6 +11,10 @@ java {
 	sourceCompatibility = '17'
 }
 
+ext {
+	mapstructVersion = "1.5.3.Final"
+}
+
 repositories {
 	mavenCentral()
 }
@@ -18,6 +22,10 @@ repositories {
 dependencies {
 	implementation project(':api')
 	implementation project(':util')
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
