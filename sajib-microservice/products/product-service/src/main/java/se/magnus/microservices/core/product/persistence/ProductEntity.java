@@ -1,14 +1,14 @@
 package se.magnus.microservices.core.product.persistence;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import se.magnus.microservices.api.core.product.Product;
 
 @Document(collection="products")
 public class ProductEntity {
+
+
     @Id
     private String id;
     @Version
@@ -77,7 +77,5 @@ public class ProductEntity {
     public void setServerAddress(String serverAddress) {
         this.serverAddress = serverAddress;
     }
-
-
     
 }

@@ -4,6 +4,9 @@ spring:
     activate:
       on-profile:
       - docker
+  data:
+    mongodb:
+      auto-index-creation: true
 
 logging:
   level:
