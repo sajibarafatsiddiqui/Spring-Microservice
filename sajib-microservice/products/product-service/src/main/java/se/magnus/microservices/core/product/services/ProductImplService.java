@@ -49,11 +49,11 @@ public class ProductImplService implements ProductService {
       throw new InvalidInputException("Invalid productId: " + productId);
     }
 
-    if (productId == 13) {
-      throw new NotFoundException("No product found for productId: " + productId);
-    }
-
-    return new Product(productId, "name-" + productId, 123, serviceUtil.getServiceAddress());
+   ProductEntity entity= repository.findByProductId(productId).orElseThrow(() -> new NotFoundException("The product with productId "+productId+" not available"));
+   Product response =mapper.entitytoApi(entity);
+   response.setServiceAddress(serviceUtil.getServiceAddress());
+   LOG.debug("Got the product with id: {}",response.getProductId());
+    return response;
   }
 
   

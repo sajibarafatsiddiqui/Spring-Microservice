@@ -1,10 +1,10 @@
 package se.magnus.microservices.api.core.product;
 
 public class Product {
-    private final int productId;
-    private final String name;
-    private final int weight;
-    private final String serviceAddress;
+    private int productId;
+    private String name;
+    private int weight;
+    private String serviceAddress;
 
     public Product(int productId, String name, int weight, String serviceAddress) {
         this.productId = productId;
@@ -12,6 +12,7 @@ public class Product {
         this.weight = weight;
         this.serviceAddress = serviceAddress;
     }
+
 
     public int getProductId() {
         return this.productId;
@@ -32,6 +33,9 @@ public class Product {
         return this.serviceAddress;
     }
 
+    public void setServiceAddress(String serviceAddress){
+       this.serviceAddress = serviceAddress;
 
-
+    }
+    
     }
