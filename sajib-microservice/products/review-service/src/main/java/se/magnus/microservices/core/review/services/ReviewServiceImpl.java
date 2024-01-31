@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import se.magnus.microservices.api.core.review.Review;
 import se.magnus.microservices.api.core.review.ReviewService;
 import se.magnus.microservices.api.exception.InvalidInputException;
+import se.magnus.microservices.core.review.persistence.ReviewRepository;
 import se.magnus.microservices.util.http.ServiceUtil;
 
 
@@ -19,9 +20,13 @@ public class ReviewServiceImpl implements ReviewService {
 
     private static final Logger log = LoggerFactory.getLogger((ReviewServiceImpl.class));
     private final ServiceUtil serviceUtil;
+    private final ReviewRepository repository;
+    private final ReviewMapper mapper;
 
     @Autowired
-    public ReviewServiceImpl(ServiceUtil serviceUtil) {
+    public ReviewServiceImpl(ReviewRepository repository, ReviewMapper mapper, ServiceUtil serviceUtil) {
+        this.repository=repository;
+        this.mapper= mapper;
         this.serviceUtil = serviceUtil;
     }
 

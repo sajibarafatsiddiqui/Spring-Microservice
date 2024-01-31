@@ -4,7 +4,7 @@ import java.util.Objects;
 public class Recommendation {
  
     private final int productId,rate,recommendationId;
-    private final String author,serviceAddress,content;
+    private String author,serviceAddress,content;
 
     public Recommendation() {
         productId =0;
@@ -52,6 +52,10 @@ public class Recommendation {
 
     public String getContent() {
         return this.content;
+    }
+
+    public void setServiceAddress(String serviceAddress){
+        this.serviceAddress=serviceAddress;
     }
 
 

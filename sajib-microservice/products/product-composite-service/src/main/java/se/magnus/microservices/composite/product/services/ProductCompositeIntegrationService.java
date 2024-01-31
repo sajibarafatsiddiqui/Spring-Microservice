@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -106,10 +107,45 @@ public class ProductCompositeIntegrationService implements ProductService,Review
         
     }
 
-    private String getErrorMessage(HttpClientErrorException ex){
-        try {
-           return objectMapper.readValue(ex.getResponseBodyAsString(),HttpErrorInfo.class).getMessage();
 
+    @Override
+    public Product createProduct(Product body) {
+        try {
+            Product product= restTemplate.postForObject(productServiceUrl,body,Product.class);
+            log.debug("Created a product with id: {}", product.getProductId());
+            return product;
+        } catch (HttpClientErrorException e) {
+            throw   handleHttpClientException(e);
+        }
+    }
+    @Override
+    public void deleteProduct(int productId) {
+        try {
+            log.debug("We will delete a product :{}",productId);
+            restTemplate.delete(productServiceUrl+productId);
+
+        } catch (HttpClientErrorException ex) {
+            throw handleHttpClientException(ex);
+        }
+    }
+
+    private RuntimeException handleHttpClientException(HttpClientErrorException ex){
+        switch(HttpStatus.resolve(ex.getStatusCode().value())){
+            case NOT_FOUND:
+                return new NotFoundException(getErrorMessage(ex));
+            case UNPROCESSABLE_ENTITY:
+                return new InvalidInputException(getErrorMessage(ex));
+
+            default:
+              log.warn("Whe have got an error: {},",ex.getStatusCode());
+              log.warn("The error message is:{}",ex.getResponseBodyAsString());    
+        return ex;
+        }
+    }
+
+    private String getErrorMessage(HttpClientErrorException ex) {
+        try {
+            return objectMapper.readValue(ex.getResponseBodyAsString(),HttpErrorInfo.class).getMessage();
         } catch (IOException e) {
             return e.getMessage();
         }

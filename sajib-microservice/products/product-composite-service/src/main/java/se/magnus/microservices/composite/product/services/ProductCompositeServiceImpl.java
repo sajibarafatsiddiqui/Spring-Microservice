@@ -77,5 +77,19 @@ String serviceAddress){
 
     return new ProductComposite(productId, name, weight,recommendationSummaries, reviewSummaries, serviceAddresses);
 }
+
+
+@Override
+public void createProduct(ProductComposite body) {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'createProduct'");
+}
+
+
+@Override
+public void deleteProduct(int productId) {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'deleteProduct'");
+}
     
 }

@@ -42,18 +42,19 @@ public class ProductImplService implements ProductService {
   }
 
   @Override
-  public Product getProduct(int productId) {
+  public Mono<Product> getProduct(int productId) {
     LOG.debug("/product return the found product for productId={}", productId);
 
     if (productId < 1) {
       throw new InvalidInputException("Invalid productId: " + productId);
     }
 
-   ProductEntity entity= repository.findByProductId(productId).orElseThrow(() -> new NotFoundException("The product with productId "+productId+" not available"));
-   Product response =mapper.entitytoApi(entity);
-   response.setServiceAddress(serviceUtil.getServiceAddress());
-   LOG.debug("Got the product with id: {}",response.getProductId());
-    return response;
+  //  ProductEntity entity= repository.findByProductId(productId).orElseThrow(() -> new NotFoundException("The product with productId "+productId+" not available"));
+  //  Product response =mapper.entitytoApi(entity);
+  //  response.setServiceAddress(serviceUtil.getServiceAddress());
+  //  LOG.debug("Got the product with id: {}",response.getProductId());
+  //   return response;
+  repository. 
   }
 
   
