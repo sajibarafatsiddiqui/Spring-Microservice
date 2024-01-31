@@ -12,7 +12,7 @@ public interface ProductService {
     Product getProduct(@PathVariable int productId);
 
     @PostMapping(value="/product/",produces="application/json",consumes="application/json")
-    Product creatProduct(@RequestBody Product body);
+    Product createProduct(@RequestBody Product body);
 
     @DeleteMapping(value="/product/{productId}")
     void deleteProduct(@PathVariable int productId);
