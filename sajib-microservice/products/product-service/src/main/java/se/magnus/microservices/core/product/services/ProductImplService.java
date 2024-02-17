@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Mono;
 import se.magnus.microservices.api.core.product.Product;
 import se.magnus.microservices.api.core.product.ProductService;
 import se.magnus.microservices.api.exception.InvalidInputException;
@@ -43,8 +44,7 @@ public class ProductImplService implements ProductService {
 
   @Override
   public Mono<Product> getProduct(int productId) {
-    LOG.debug("/product return the found product for productId={}", productId);
-
+    
     if (productId < 1) {
       throw new InvalidInputException("Invalid productId: " + productId);
     }
@@ -54,7 +54,11 @@ public class ProductImplService implements ProductService {
   //  response.setServiceAddress(serviceUtil.getServiceAddress());
   //  LOG.debug("Got the product with id: {}",response.getProductId());
   //   return response;
-  repository. 
+  return repository.findByProductId(productId)
+         .switchIfEmpty(Mono.error(new NotFoundException("The product with productId "+productId+" not available")))
+         .log(log.getName(),FINE) 
+         .map(e->mapper(entityToApi(e)))
+         .map(e->setServerAddress(e)) ; 
   }
 
   
