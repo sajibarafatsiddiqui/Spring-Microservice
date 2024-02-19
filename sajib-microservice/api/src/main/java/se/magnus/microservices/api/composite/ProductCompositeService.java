@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import reactor.core.publisher.Mono;
 
 
 @Tag(name = "ProductCompositeService", description = "REST API for composite product information.")
@@ -34,7 +35,7 @@ public interface ProductCompositeService {
         @ApiResponse(responseCode = "422", description = "${api.responseCodes.unprocessableEntity.description}")
 })
     @PostMapping(value="/product-composite",consumes="application/json")
-    void createProduct(@RequestBody ProductComposite body);
+    Mono<Void> createProduct(@RequestBody ProductComposite body);
 
     @Operation(
         summary = "${api.product-composite.delete-composite-product.description}",
@@ -45,7 +46,7 @@ public interface ProductCompositeService {
         @ApiResponse(responseCode = "422", description = "${api.responseCodes.unprocessableEntity.description}")
         })
     @DeleteMapping("/product-composite/{productId}")
-    void deleteProduct(@PathVariable int productId);
+    Mono<Void> deleteProduct(@PathVariable int productId);
     
     
 }
