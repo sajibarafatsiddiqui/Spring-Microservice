@@ -3,7 +3,7 @@ import java.util.Objects;
 
 public class Review{
 private final int productId, reviewId;
-private final String author, subject, content, serviceAddress;
+private String author, subject, content, serviceAddress;
 
     public Review() {
         productId=0; reviewId=0;
@@ -48,7 +48,9 @@ private final String author, subject, content, serviceAddress;
     public String getServiceAddress() {
         return this.serviceAddress;
     }
-
+    public void setServiceAddress(String serviceAddress){
+        this.serviceAddress=serviceAddress;
+    } 
 
     @Override
     public boolean equals(Object o) {

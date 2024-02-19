@@ -12,11 +12,11 @@ public interface ProductMapper {
     @Mappings({
         @Mapping(target = "serviceAddress", ignore = true)
     })
-    Product entitytoApi(ProductEntity entity);
+    Product entityToApi(ProductEntity entity);
 
     @Mappings({
         @Mapping(target = "id", ignore = true),
         @Mapping(target = "version", ignore = true)
     })
-    ProductEntity apitoEntity(Product api);
+    ProductEntity apiToEntity(Product api);
 }
